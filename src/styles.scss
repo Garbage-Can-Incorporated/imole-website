@@ -1,1 +1,394 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+/* For use in src/lib/core/theming/_palette.scss */
+$primary-palette: (
+  50: #fef4e4,
+  100: #fde3bc,
+  200: #fcd08f,
+  300: #fbbd62,
+  400: #faae41,
+  500: #f9a01f,
+  600: #f8981b,
+  700: #f78e17,
+  800: #f68412,
+  900: #f5730a,
+  A100: #ffffff,
+  A200: #fff3eb,
+  A400: #ffd4b8,
+  A700: #ffc59e,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$accent-palette: (
+  50: #fffde1,
+  100: #fef9b3,
+  200: #fef580,
+  300: #fef14d,
+  400: #fdee27,
+  500: #fdeb01,
+  600: #fde901,
+  700: #fce501,
+  800: #fce201,
+  900: #fcdd00,
+  A100: #ffffff,
+  A200: #fffdef,
+  A400: #fff6bc,
+  A700: #fff2a2,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+// INFO Primary #F9A01F
+// $imole-website-primary: mat.define-palette(mat.$indigo-palette);
+$imole-website-primary: mat.define-palette($primary-palette);
+// INFO Accent #FDEB01
+// $imole-website-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$imole-website-accent: mat.define-palette($accent-palette);
+
+// The warn palette is optional (defaults to red).
+$imole-website-warn: mat.define-palette(mat.$red-palette);
+
+@include mat.core();
+
+$typography: mat.define-typography-config(
+  $font-family: "Hanken Grotesk, Roboto, sans-serif",
+);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$imole-website-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $imole-website-primary,
+      accent: $imole-website-accent,
+      warn: $imole-website-warn,
+    ),
+    typography: $typography,
+    density: 0,
+  )
+);
+
+@include mat.typography-hierarchy($typography);
+
+$ng-theme: $imole-website-theme;
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+$primary: map-get($ng-theme, "primary", "default");
+$light: map-get($ng-theme, "primary", "lighter");
+$secondary: map-get($ng-theme, "accent", "default");
+// $warning: map-get($ng-theme, "warn", "default");
+$danger: map-get($ng-theme, "warn", 700);
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  3e: $spacer * 1,
+  4: $spacer * 1.5,
+  4e: $spacer * 2,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 5,
+  8: $spacer * 6,
+  9: $spacer * 7,
+  10: $spacer * 8,
+  11: $spacer * 9,
+);
+
+$x-values: (
+  0: 0,
+  5: 5%,
+  10: 10%,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  30: 30%,
+  35: 35%,
+  40: 40%,
+  45: 45%,
+  60: 60%,
+  65: 65%,
+  70: 70%,
+  75: 75%,
+  80: 80%,
+  85: 85%,
+  90: 90%,
+  95: 95%,
+  320px: 320px,
+  480px: 480px,
+  420px: 420px,
+  520px: 520px,
+  620px: 620px,
+  720px: 720px,
+  820px: 820px,
+  unset: unset,
+  fit-content: fit-content,
+  50vw: 50vw,
+  100vw: 100vw,
+  50vh: 50vh,
+  100vh: 100vh,
+);
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "min-width": (
+      property: min-width,
+      class: mnw,
+      responsive: true,
+      values: $x-values,
+    ),
+    "width": (
+      property: width,
+      class: w,
+      responsive: true,
+      values:
+        map-merge(
+          map-get($utilities, width, values),
+          $x-values
+        ),
+    ),
+    "max-width": (
+      property: max-width,
+      class: mxw,
+      responsive: true,
+      values: $x-values,
+    ),
+    "height": (
+      property: height,
+      class: h,
+      responsive: true,
+      values:
+        map-merge(
+          map-get($utilities, height, values),
+          $x-values
+        ),
+    ),
+    "min-height": (
+      property: min-height,
+      class: mnh,
+      responsive: true,
+      values: $x-values,
+    ),
+    "max-height": (
+      property: max-height,
+      class: mxh,
+      responsive: true,
+      values:
+        map-merge(
+          map-get($utilities, height, values),
+          $x-values
+        ),
+    ),
+    "rounded": (
+      property: border-radius,
+      class: rounded,
+      responsive: true,
+      values: map-get($utilities, rounded, values),
+    ),
+    "z-index": (
+      property: z-index,
+      class: z-index,
+      responsive: true,
+      values: (
+        0: 0,
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+      ),
+    ),
+    "padding": (
+      responsive: true,
+      property: padding,
+      class: p,
+      values: $spacers,
+    ),
+    "padding-x": (
+      responsive: true,
+      property: padding-right padding-left,
+      class: px,
+      values: $spacers,
+    ),
+    "padding-y": (
+      responsive: true,
+      property: padding-top padding-bottom,
+      class: py,
+      values: $spacers,
+    ),
+    "padding-top": (
+      responsive: true,
+      property: padding-top,
+      class: pt,
+      values: $spacers,
+    ),
+    "padding-end": (
+      responsive: true,
+      property: padding-right,
+      class: pe,
+      values: $spacers,
+    ),
+    "padding-bottom": (
+      responsive: true,
+      property: padding-bottom,
+      class: pb,
+      values: $spacers,
+    ),
+    "padding-start": (
+      responsive: true,
+      property: padding-left,
+      class: ps,
+      values: $spacers,
+    ),
+    "overflow": (
+      property: overflow,
+      class: overflow,
+      responsive: true,
+      values: (
+        auto: auto,
+        hidden: hidden,
+      ),
+    ),
+    "overflow-x": (
+      property: overflow-x,
+      class: overflow-x,
+      responsive: true,
+      values: (
+        auto: auto,
+        hidden: hidden,
+      ),
+    ),
+    "overflow-y": (
+      property: overflow-y,
+      class: overflow-y,
+      responsive: true,
+      values: (
+        auto: auto,
+        hidden: hidden,
+      ),
+    ),
+    "bottom": (
+      property: bottom,
+      class: bottom,
+      responsive: true,
+      values:
+        map-merge(
+          map-get($utilities, rounded, values),
+          (
+            0: 0,
+          )
+        ),
+    ),
+    "right": (
+      property: right,
+      class: right,
+      responsive: true,
+      values: (
+        0: 0,
+        m92px: -92px,
+      ),
+    ),
+  )
+);
+
+@import "bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0);
+
+@include mat.all-component-themes($imole-website-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+@mixin no-outline {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+@mixin normalize-anchor {
+  text-decoration: none !important;
+  color: inherit !important;
+
+  &:hover {
+    color: auto !important;
+    text-decoration: none !important;
+  }
+}
+
+@mixin apply-font-family($font-family) {
+  font-family: $font-family;
+}
+
+@mixin backdrop-filter($size: 5px) {
+  backdrop-filter: blur($size);
+}
+
+body {
+  width: 100vw;
+  overflow: hidden auto;
+  scroll-behavior: smooth;
+
+  a {
+    @include normalize-anchor();
+  }
+
+  input,
+  textarea {
+    @include no-outline();
+  }
+
+  textarea {
+    resize: none !important;
+  }
+}

@@ -1,0 +1,63 @@
+<div
+    class="d-flex flex-wrap w-100 mnh-100vh flex-wrap-reverse px-2 px-sm-3 px-lg-4 px-lg-5 py-3 py-sm-0">
+    <div class="d-flex flex-column col-12 col-md-6 col-lg-5 pe-md-3">
+        <div class="d-flex flex-column w-100 mt-auto">
+            <div class="d-flex mb-0 mat-headline-3">
+                <span class="fw-bold">Get in</span>
+                <span class="ms-1 text-primary fw-bold">Touch</span>
+            </div>
+            <span class="mt-4 fw-bold">Reach our to us with your most pressing questions.</span>
+        </div>
+
+        <!-- INFO Contact form -->
+        <form [formGroup]="form" class="d-flex flex-column w-100 mt-5">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Phone number</mat-label>
+                <input matInput type="tel" formControlName="phone">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Your Message</mat-label>
+                <textarea matInput placeholder="Your message" rows="4" formControlName="message"></textarea>
+            </mat-form-field>
+
+            <button mat-flat-button class="w-100 py-4 text-uppercase rounded-2" color="primary">send</button>
+        </form>
+
+        <!-- INFO Contact information -->
+        <div class="d-flex flex-wrap w-100 mt-6 mb-auto">
+            <!-- INFO phone -->
+            <div class="d-flex col-12 col-sm-6 mt-sm-0">
+                <mat-icon fontSet="material-symbols-outlined" class="my-auto">phone</mat-icon>
+                <div class="d-flex flex-column ms-2">
+                    <span class="text-uppercase fw-bold">Phone</span>
+                    <span class="text-primary">+234 808 954 7706</span>
+                </div>
+            </div>
+
+            <!-- INFO Email -->
+            <div class="d-flex col-12 col-sm-6 mt-3 mt-sm-0">
+                <mat-icon fontSet="material-symbols-outlined" class="my-auto">email</mat-icon>
+                <div class="d-flex flex-column ms-2">
+                    <span class="text-uppercase fw-bold">Email</span>
+                    <span class="text-primary">hello@evryword.com.ng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO Section Image -->
+    <div class="d-flex col-12 col-md-6 col-lg-7 mb-4 mb-sm-0 ps-0 ps-sm-3">
+        <img class="mxw-100 mxw-md-620px h-320px h-md-620px m-auto rounded-2" src="https://storage.googleapis.com/gci-static-assets/imole/get-in-touch-image.png" alt="Get in touch background">
+    </div>
+</div>
